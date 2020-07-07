@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{pageTitle}}</title>
+</head>
+<body>
+
+	<form method="POST">
+		{% csrf_token %}
+		
+		<label for="username">username : </label><input type="text" name="username" id="username">
+		<label for="email">email : </label><input type="email" name="email" id="email">
+		<label for="password1">password : </label><input type="password1" name="password1" id="password1">
+		<label for="password2">password : </label><input type="password2" name="password2" id="password2">
+
+		<button type="submit">daftar</button>
+
+	</form>
+
+	{% if check_password %}
+		<script type="text/javascript">
+			alert('password tidak sama');
+			document.location.href = "{% url 'user:register' %}"
+		</script>
+	{% endif %}
+
+</body>
+</html>

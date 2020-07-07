@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{pageTitle}}</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		alert('username atau email sudah digunakan');
+		document.location.href = "{% url 'user:register' %}";
+	</script>
+
+</body>
+</html>

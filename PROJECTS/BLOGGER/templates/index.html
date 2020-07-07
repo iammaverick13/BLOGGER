@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#icon").click(function(){
+                $('ul').toggleClass('show')
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <nav>
+        <label class="logo">Design</label>
+        <ul>
+            <a href="#" class="active"><li>Home</li></a>
+            <a href="#"><li>Contact</li></a>
+            <a href="#"><li>Download</li></a>
+            <a href="#"><li>About</li></a>
+        </ul>
+        <label id="icon">#</label>
+    </nav>
+
+    <section>
+        <div class="search">
+            <input type="text" placeholder="search a blog topic"><button type="button">search</button>
+        </div>
+        <ul>
+            <a href=""><li>Learn more</li></a>
+            <a href="{% url 'user:login' %}"><li>Create a blog</li></a>
+        </ul>
+    </section>
+
+</body>
+</html>
