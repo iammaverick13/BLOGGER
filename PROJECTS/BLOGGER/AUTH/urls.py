@@ -8,4 +8,5 @@ urlpatterns = [
 	path('login/', loginView, name='login'),
 	path('logout/', logoutView, name='logout'),
 	path('dashboard/<int:id>', dashboardView, name='dashboard'),
+	path('dashboard/update/<int:id>', dashboardUpdateView, name='dashboard_update'),
 ]

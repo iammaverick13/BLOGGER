@@ -23,4 +23,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('<int:id>/', userHome, name='user_home'),
     path('accounts/', include('AUTH.urls')),
+    path('blogger/', include('BLOG.urls')),
 ]

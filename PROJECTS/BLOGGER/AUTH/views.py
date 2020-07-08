@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+from .models import *
 # Create your views here.
 def userExist(request):
 	context = {
@@ -29,6 +30,9 @@ def registerView(request):
 
 		else:
 			user = User.objects.create_user(username=username, email=email, password=password1)
+			profile = Profile.objects.create(user=user, gender='', age=0)
+			profile.save()
+			
 			login(request, user)
 			return redirect('/'+str(user.id))
 
@@ -61,6 +65,33 @@ def logoutView(request):
 	logout(request)
 	return redirect('/')
 
+from BLOG.models import *
+
 def dashboardView(request, id):
 	user = User.objects.get(id=id)
-	return render(request, 'user/dashboard.html')		
+	blogs = Blog.objects.filter(user__id=id)
+	context = {
+		'blogs':blogs,
+	}
+	return render(request, 'user/dashboard.html', context)
+
+from .forms import *
+
+def dashboardUpdateView(request, id):
+	user = User.objects.get(id=id)
+	profile = Profile.objects.get(user__id=id)
+	form = UpdateDashboardForm(instance=profile)
+
+	if request.method == 'POST':
+		form = UpdateDashboardForm(request.POST, instance=profile)
+		if form.is_valid():
+			form.save()
+			return redirect('/accounts/dashboard/'+str(user.id))
+	else:
+		form = UpdateDashboardForm()
+
+	context = {
+		'form':form,
+	}
+
+	return render(request, 'user/update_dashboard.html', context)

@@ -7,8 +7,26 @@
 </head>
 <body>
     
-    <h3>hai {{user.username}}</h3>
-    <a href="{% url 'user:logout' %}">keluar</a>
+    <div class="kiri" style="float: left;">
+        <h3>hai {{user.username}}</h3>
+        <ul>
+            <li>email : {{user.email}}</li>
+        </ul>
+        <a href="{% url 'user:dashboard_update' user.id %}">update</a>
+        <a href="{% url 'user:logout' %}">keluar</a>
+        <a href="{% url 'user_home' user.id %}">kembali</a>
+    </div>
+
+    <div class="kanan" style="float: kanan; margin-left: 90%;">
+        <a href="{% url 'blog:add_blog' user.id %}">add article</a>
+    </div>
+
+    <div class="content" style="margin-left: 300px;">
+        {% for i in blogs %}
+            <h3>{{i.title}}</h3>
+            <p>{{i.body}}</p>
+        {% endfor %}
+    </div>
 
 </body>
 </html>
