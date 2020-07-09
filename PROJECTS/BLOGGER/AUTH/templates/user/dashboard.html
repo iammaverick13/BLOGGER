@@ -21,10 +21,12 @@
         <a href="{% url 'blog:add_blog' user.id %}">add article</a>
     </div>
 
-    <div class="content" style="margin-left: 300px;">
+    <div class="content" style="margin-left: 400px; margin-right: 20%; text-align: justify;">
         {% for i in blogs %}
             <h3>{{i.title}}</h3>
             <p>{{i.body}}</p>
+            <a href="/blogger/delete/{{user.id}}/{{i.title}}"><button type="button">delete</button></a>
+            <a href="/blogger/update/{{user.id}}/{{i.slug}}"><button type="button">update</button></a>
         {% endfor %}
     </div>
 

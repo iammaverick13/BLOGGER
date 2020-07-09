@@ -7,3 +7,4 @@ class AddBlogForm(ModelForm):
         model = Blog
         fields = '__all__'
         exclude = ['user']
+		
