@@ -67,11 +67,29 @@ def logoutView(request):
 
 from BLOG.models import *
 
-def dashboardView(request, id):
+def dashboardView(request, id, filter='all'):
+	form = ImgForm()
 	user = User.objects.get(id=id)
-	blogs = Blog.objects.filter(user__id=id)
+	profile = Profile.objects.get(user__id=id)
+	
+	if filter == 'all':
+		blogs = Blog.objects.filter(user__id=id)
+	else:
+		blogs = Blog.objects.filter(title__icontains=filter)
+
+	if request.method == 'POST':
+		form = ImgForm(request.POST, request.FILES)
+		if form.is_valid():
+			profile.img = form.cleaned_data.get('img')
+			profile.save()
+			return redirect('/accounts/dashboard/'+str(user.id))
+	else:
+		form = ImgForm()
+
 	context = {
+		'form':form,
 		'blogs':blogs,
+		'profile':profile,
 	}
 	return render(request, 'user/dashboard.html', context)
 

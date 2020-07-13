@@ -8,27 +8,44 @@
 <body>
     
     <div class="kiri" style="float: left;">
+        <img src="{{profile.img.url}}" alt="" style="width: 200px; height: 200px;">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
+            <br>
+            <button type="submit">update</button>
+        </form>
         <h3>hai {{user.username}}</h3>
         <ul>
             <li>email : {{user.email}}</li>
         </ul>
         <a href="{% url 'user:dashboard_update' user.id %}">update</a>
-        <a href="{% url 'user:logout' %}">keluar</a>
-        <a href="{% url 'user_home' user.id %}">kembali</a>
+        <a href="{% url 'user_home' user.id %}">Home</a>
     </div>
 
     <div class="kanan" style="float: kanan; margin-left: 90%;">
+        <div style="text-align: center; border: 1px solid black;">
+            <h3>your article</h3>
+            <h1>{{blogs.count}}</h1>
+        </div>
         <a href="{% url 'blog:add_blog' user.id %}">add article</a>
+        <a href="{% url 'user:logout' %}">Log out</a>
     </div>
 
-    <div class="content" style="margin-left: 400px; margin-right: 20%; text-align: justify;">
+    <div class="content" style="margin-left: 400px; margin-right: 20%; text-align: justify; margin-top: -10%;">
+    
+        <input name="search" type="text" style="width: 60%; height: 30px; margin-left: 30px; font-size: 20px; padding-left: 10px;" placeholder="search topic">
+        <button type="submit" style="height: 36px; margin-left: 10px; font-size: 20px;">search</button>
+
         {% for i in blogs %}
             <h3>{{i.title}}</h3>
             <p>{{i.body}}</p>
             <a href="/blogger/delete/{{user.id}}/{{i.title}}"><button type="button">delete</button></a>
-            <a href="/blogger/update/{{user.id}}/{{i.slug}}"><button type="button">update</button></a>
+            <a href="/blogger/update/{{user.id}}/{{i.slug}}"><button type="button">update</button></a><br>
+            <hr>
         {% endfor %}
     </div>
 
 </body>
 </html>
+

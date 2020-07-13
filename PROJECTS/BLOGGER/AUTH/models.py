@@ -12,6 +12,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length=255, choices=GENDER)
     age = models.IntegerField(default=0)
+    img = models.ImageField(default="{% static 'img/profile.png' %}")
 
     def __str__(self):
         return self.user.username

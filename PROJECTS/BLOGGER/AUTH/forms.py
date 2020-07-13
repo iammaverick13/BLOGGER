@@ -7,3 +7,9 @@ class UpdateDashboardForm(ModelForm):
         model = Profile
         fields = '__all__'
         exclude = ['user']
+
+
+class ImgForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['img']
